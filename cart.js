@@ -40,7 +40,8 @@ function createElements(item) {
   div.appendChild(btnGroup);
 
   cartItemElement.appendChild(div);
-  document.querySelector('.cartContainer').appendChild(cartItemElement);
+  if (document.querySelector('.cartContainer'))
+    document.querySelector('.cartContainer').appendChild(cartItemElement);
 
   order.addEventListener('click', () => {
     alert("Order placed");
@@ -54,7 +55,7 @@ function createElements(item) {
 }
 
 function removeFromCart(cartItem) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem('cart'));
   
   // Find index of the cart item to remove
   let index = cart.findIndex(item => (
@@ -77,7 +78,7 @@ function removeFromCart(cartItem) {
 
 // Add to cart
 export function addToCart(imgSrc, size, cost, title) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || []; // Retrieve the cart from localStorage
+  let cart = JSON.parse(localStorage.getItem("cart")); // Retrieve the cart from localStorage
   let cartItems = {imgSrc, size, cost, title}; // Object used to save into localStorage
   cart.push(cartItems); // Adds an item with the previous details
   localStorage.setItem("cart", JSON.stringify(cart)); // Save to localStorage
@@ -85,7 +86,7 @@ export function addToCart(imgSrc, size, cost, title) {
 
 // Saves to cart.json
 export function saveCartToJsonFile() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || []; // Retrieve the cart from localStorage
+  let cart = JSON.parse(localStorage.getItem("cart")); // Retrieve the cart from localStorage
 
   // Send the cart data to the server
   fetch('/save-cart', {
@@ -111,7 +112,7 @@ export function saveCartToJsonFile() {
 
 document.addEventListener('DOMContentLoaded', () => {
     let cartContainer = document.querySelector('.cartContainer');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart'));
 
     if (cart.length === 0 && cartContainer)
       cartContainer.innerHTML = '<h1 style="padding: 45px;">Your cart is empty</h1>';

@@ -27,6 +27,12 @@ a {
 	z-index: 10;
 }
 
+/*To not make overflow the header*/
+.page-selected:hover {
+	border-bottom: 0;
+	z-index: 999;
+}
+
 .circle {
 	position: absolute;
 	width: 20px;
@@ -477,13 +483,16 @@ svg {
 	z-index: 2;
 	transition: all 1s ease-out;
 	margin: auto;
-	top: 10%;
+	top: 20%;
 }
 
 .title {
 	position: absolute;
 	text-align: center;
+	margin: 15px;
+	font-size: 1.75rem;
 	bottom: 30%;
+	z-index: 999;
 }
 
 .sizes {
@@ -573,8 +582,6 @@ svg {
 /* IMPORTANTE DA NON CAMBIARE MAI */
 .gallery-wrap {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	margin: 2% auto;
 }
 

@@ -177,13 +177,14 @@ export function updateCartCounter() {
         menuOption = li.parentElement;
     });
     
-    circle.innerText = cartCount;
-    
     let existingCircle = menuOption.querySelector('.circle');
     if (existingCircle)
         existingCircle.remove();
-    
-    menuOption.append(circle);
+
+    if (cartCount > 0) {
+        circle.innerText = cartCount;
+        menuOption.append(circle);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
