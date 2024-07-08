@@ -1,0 +1,56 @@
+[
+    {
+        "title": "Dunk High Purple",
+        "imgSrc": "",
+        "sizes": [
+            {
+                "size": "EU36.5",
+                "cost": "€740"
+            },
+            {
+                "size": "EU37",
+                "cost": "€750"
+            },
+            {
+                "size": "EU37.5",
+                "cost": "€760"
+            },
+            {
+                "size": "EU38",
+                "cost": "€750"
+            },
+            {
+                "size": "EU38.5",
+                "cost": "€760"
+            },
+            {
+                "size": "EU39",
+                "cost": "€750"
+            },
+            {
+                "size": "EU39.5",
+                "cost": "€760"
+            },
+            {
+                "size": "EU40",
+                "cost": "€750"
+            },
+            {
+                "size": "EU40.5",
+                "cost": "€750"
+            },
+            {
+                "size": "EU41",
+                "cost": "€750"
+            },
+            {
+                "size": "EU41.5",
+                "cost": "€750"
+            },
+            {
+                "size": "EU42",
+                "cost": "€750"
+            }
+        ]
+    }
+]
