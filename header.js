@@ -33,6 +33,9 @@ function generateHeader() {
         </div>
         </label>
         <ul class="menu">
+        <li id="login-option">
+            <a href="login.html">Login</a>
+        </li>
         <li id="nike-option">
             <a href="nike.html">Nike</a>
             <div class="dropdown">

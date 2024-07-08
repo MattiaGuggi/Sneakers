@@ -50,7 +50,6 @@ function createElements(item) {
   del.addEventListener('click', () => {
     cartItemElement.remove(); // Remove the cart item from DOM
     removeFromCart(item); // Remove the item from localStorage
-    saveCartToJsonFile(); // Saves into cart.json the items
   });
 }
 
@@ -72,8 +71,10 @@ function removeFromCart(cartItem) {
 
     // Empty cart
     if (cart.length === 0)
-      document.querySelector('.cartContainer').innerHTML = '<h1 style="padding: 45px;">Your cart is empty</h1>';
+      document.querySelector('.cartContainer').innerHTML = '<h1 style="padding: 45px;">YOUR CART IS EMPTY</h1>';
   }
+  
+  updateCartCounter();
 }
 
 // Add to cart
@@ -82,32 +83,7 @@ export function addToCart(imgSrc, size, cost, title) {
   let cartItems = {imgSrc, size, cost, title}; // Object used to save into localStorage
   cart.push(cartItems); // Adds an item with the previous details
   localStorage.setItem("cart", JSON.stringify(cart)); // Save to localStorage
-}
-
-// Saves to cart.json
-export function saveCartToJsonFile() {
-  let cart = JSON.parse(localStorage.getItem("cart")); // Retrieve the cart from localStorage
-
-  // Send the cart data to the server
-  fetch('/save-cart', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(cart)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      console.log("Cart saved successfully!");
-    }
-    else {
-      console.error("Error saving cart:", data.message);
-    }
-  })
-  .catch(error => console.error("Fetch error:", error));
-
-  updateCartCounter(); // Updates the counter
+  updateCartCounter();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -115,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = JSON.parse(localStorage.getItem('cart'));
 
     if (cart.length === 0 && cartContainer)
-      cartContainer.innerHTML = '<h1 style="padding: 45px;">Your cart is empty</h1>';
+      cartContainer.innerHTML = '<h1 style="padding: 45px;">YOUR CART IS EMPTY</h1>';
     else {
       cart.forEach(item => {
         createElements(item); // Creates the item's card based on the cart.json

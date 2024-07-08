@@ -13,26 +13,23 @@ app.use(bodyParser.json());
 // Serve static files (HTML, CSS, JS)
 app.use(express.static(path.join(__dirname)));
 
-// Endpoint to save the cart data
-app.post('/save-cart', (req, res) => {
-  const cartData = req.body;
-  const filePath = path.join(__dirname, 'cart.json');
+app.post('/save-users', (req, res) => {
+  const users = req.body;
 
-  fs.writeFile(filePath, JSON.stringify(cartData, null, 2), (err) => {
+  fs.writeFile('users.json', JSON.stringify(users, null, 2), (err) => {
     if (err) {
-      console.error("Error writing file:", err);
-      res.status(500).json({ success: false, message: 'Failed to save cart data' });
+      console.error('Error writing to users.json:', err);
+      return res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
-    else {
-      res.json({ success: true, message: 'Cart data saved successfully' });
-    }
+
+    res.json({ success: true });
   });
 });
 
 // Serve the index.html file at the root URL
 app.get('/', (res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Start the server
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-import { addToCart, saveCartToJsonFile } from './cart.js';
+import { addToCart } from './cart.js';
 
 // Search bar's filter
 export function filterResults() {
@@ -98,7 +98,6 @@ function purchaseBtnEvents() {
         selectedSize = line[0];
         selectedCost = line[1];
         addToCart(imgSrc, selectedSize, selectedCost, selectedTitle); // Adds the item's card to the cart page
-        saveCartToJsonFile(); // Save all the progress into the cart.json
       }
       else
         alert("No size selected");
@@ -147,5 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
   scrollSizes();
   purchaseBtnEvents();
   emailInputEvent();
-  alert(window.getComputedStyle(document.body).getPropertyValue("width"));
 });

@@ -1,19 +1,25 @@
+// Fetch the page name from the document
+let pageName = document.querySelector(".page-name").innerText;
+
+// Construct the URL for the JSON file based on the page name
+let jsonFileUrl = './json_files/' + pageName.toLowerCase() + '.json';
+
 // Fetch the JSON file
-fetch('articles.json')
+fetch(jsonFileUrl)
 .then(response => response.json()) // Parse the JSON from the response
 .then(data => {
     // Process the data
     let sneakersContainer = document.querySelector('.group');
-    let pageName = document.querySelector(".page-name").innerText;
-    let sneakersArray = data[pageName]; // Accessing the sneakers array based on the page name
+    let leftArrowGroup = document.querySelector("#leftArrow");
+    let rightArrowGroup = document.querySelector("#rightArrow");
+    let line = 0, galleryWrap, html;
 
     // Check if the page name exists in the data
-    if (!sneakersArray)
+    if (!data)
         return;
     
-    let galleryWrap, html;
     // Loop through the array and display the data
-    sneakersArray.forEach((sneaker, index) => {
+    data.forEach((sneaker, index) => {
         if (index % 4 == 0) {
             galleryWrap = document.createElement("div");
             galleryWrap.classList.add("gallery-wrap");
@@ -60,6 +66,12 @@ fetch('articles.json')
         if (index % 4 == 0)
             sneakersContainer.appendChild(galleryWrap);
 
+        if (index % 16 == 0) {
+            leftArrowGroup.innerHTML += `<div class="arrow arrow-left" style="margin-top: ${700*line+10}px">&#9664;</div>`;
+            rightArrowGroup.innerHTML += `<div class="arrow arrow-right" style="margin-top: ${700*line+10}px">&#9658;</div>`;
+            line++;
+        }
+
         purchaseBtn.addEventListener("click", () => {
             document.querySelectorAll("sizes").forEach(size => {
                 let sizeBtn = size.querySelectorAll(".size-button");
@@ -73,7 +85,6 @@ fetch('articles.json')
                     let line = html.split(" <br> ");
 
                     addToCart(sneaker.imgSrc, line[0], line[1], sneaker.title);
-                    saveCartToJsonFile();
                 }
                 else
                     alert("No size selected");
@@ -87,8 +98,10 @@ fetch('articles.json')
         let title = card.querySelector(".title");
         let snk = card.querySelector("img");
 
-        if (window.getComputedStyle(title).getPropertyValue("height").replace("px", "") > 42) // Card's height goes on by 42
-            snk.style.transform = 'translateY(-45px)';
+        if (window.getComputedStyle(title).getPropertyValue("height").replace("px", "") > 42) {// Card's height goes on by 42
+            if (window.getComputedStyle(document.body).getPropertyValue("width").replace("px", "") >= 800)
+                snk.style.transform = 'translateY(-45px)';
+        }
     });
 })
 .catch(error => {
