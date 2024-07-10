@@ -2,7 +2,7 @@
 let pageName = document.querySelector(".page-name").innerText;
 
 // Construct the URL for the JSON file based on the page name
-let jsonFileUrl = pageName.toLowerCase() + '.json';
+let jsonFileUrl = './json_files/' + pageName.toLowerCase() + '.json';
 
 // Fetch the JSON file
 fetch(jsonFileUrl)

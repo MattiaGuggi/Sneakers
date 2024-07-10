@@ -3,7 +3,7 @@ import { toggleBar, filterResults } from './script.js';
 function generateHeader() {
     let header = document.querySelector('.header');
     header.innerHTML = `
-        <a href="index.html" class="logo">LOGO</a>
+        <img src="./snk_logo.png" class="logo">
         <form class="search">
         <button type="button" class="search__button">
             <i  class="ri-search-2-line"></i>

@@ -122,12 +122,34 @@ document.addEventListener('DOMContentLoaded', () => {
   let rightArrow = document.querySelector("#rightArrow");
 
   if (cardContainer) {
+    let startX, startY, scrollLeft;
+  
+    // Function to handle the touch start event
+    cardContainer.addEventListener("touchstart", (e) => {
+      let touch = e.touches[0]; // Get the first touch point
+      startX = touch.pageX - cardContainer.offsetLeft;
+      startY = touch.pageY - cardContainer.offsetTop;
+      scrollLeft = cardContainer.scrollLeft;
+      cardContainer.style.scrollBehavior = "auto"; // Disable smooth scrolling
+    });
+  
+    // Function to handle the touch move event
+    cardContainer.addEventListener("touchmove", (e) => {
+      let touch = e.touches[0];
+      let x = touch.pageX - cardContainer.offsetLeft;
+      let walkX = x - startX; // Calculate the horizontal distance moved
+  
+      // Scroll horizontally within the cardContainer
+      cardContainer.scrollLeft = scrollLeft - walkX;
+    });
+  
+    // Function to handle the wheel event
     cardContainer.addEventListener("wheel", (e) => {
       e.preventDefault();
       cardContainer.scrollLeft += e.deltaY;
       cardContainer.style.scrollBehavior = "auto";
     });
-  }
+  }  
 
   if (rightArrow) {
     rightArrow.addEventListener("click", () => {

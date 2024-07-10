@@ -57,7 +57,9 @@ a {
 .login,
 .signup {
 	height: 175px;
-	gap: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .email,
@@ -155,10 +157,13 @@ a {
 }
 
 .header .logo {
+	width: auto;
+	height: 69px;
 	float: left;
 	font-size: 25px;
-	margin: 14px 15px;
+	margin: 0;
 	transition: all 0.2s;
+	cursor: pointer;
 }
 
 .header .logo:hover {
@@ -632,14 +637,8 @@ svg {
 
 .scroll {
     position: relative; /* Ensure it stays in flow */
-	padding-top: 20px;
 	width: 100%;
 	top: 150px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	white-space: var(--white);
 	margin-bottom: 300px;
 }
 
@@ -648,8 +647,7 @@ svg {
 	width: 100%;
 	display: grid;
 	grid-template-columns: auto auto auto auto;
-	grid-gap: 10px;
-	flex: none;
+	gap: 10px;
 	overflow-x: scroll;
 	overflow: hidden;
 }
@@ -661,6 +659,7 @@ svg {
 .gallery-wrap {
 	display: flex;
 	margin: 2% auto;
+	width: inherit; /*MAKED CARDS STAY ON THE LEFT*/
 }
 
 .arrow {
